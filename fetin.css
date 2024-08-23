@@ -1,0 +1,47 @@
+body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .list-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .list-item .status {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 15px; /* Espaço entre o círculo e o texto */
+            border: 2px solid #333; /* Borda ao redor do círculo */
+        }
+        .list-item.correct .status {
+            background-color: green;
+        }
+        .list-item.incorrect .status {
+            background-color: red;
+        }
+        .buttons-container {
+            display: flex;
+            gap: 10px; /* Espaço entre os botões */
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            text-align: center;
+        }
+        .button.primary {
+            background-color: #00b300; /* Azul para o botão primário */
+        }
+        .button.secondary {
+            background-color: #cc0000; /* Cinza para o botão secundário */
+        }
+        .button.primary:hover {
+            background-color: #009b00; /* Azul escuro ao passar o mouse */
+        }
+.button.secondary:hover {
+  background-color: #b00000; /* Cinza escuro ao passar o mouse */
+}
