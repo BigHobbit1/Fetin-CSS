@@ -1,0 +1,27 @@
+# Etapa 1: Usar uma imagem base do Jenkins
+FROM jenkins/jenkins:lts
+
+# Etapa 2: Instalar dependências do sistema para o Python
+USER root
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-dev \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Etapa 3: Instalar bibliotecas Python (pandas ou numpy)
+RUN pip3 install --no-cache-dir pandas numpy --break-system-packages
+
+# Etapa 4: Definir o diretório de trabalho dentro do container
+WORKDIR /var/jenkins_home
+
+# Etapa 5: Copiar o código da aplicação para dentro do container
+COPY . .
+
+# Etapa 6: Expor a porta padrão do Jenkins (caso precise)
+EXPOSE 8080
+
+# Etapa 7: Configurar o Jenkins para rodar o script Python
+# O Jenkins será configurado para rodar um job que usa o Python para coleta de dados.
+CMD ["java", "-jar", "/usr/share/jenkins/jenkins.war"]
