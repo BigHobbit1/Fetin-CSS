@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'my-jenkins-pandas-numpy:latest'  // Nome da imagem Docker
+        DOCKER_IMAGE = 'my-teste1-numpy-pandas:latest'  // Nome da imagem Docker
     }
 
     stages {
