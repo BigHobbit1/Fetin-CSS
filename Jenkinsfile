@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     // Instala as dependências do Python
-                    sh 'pip3 install -r requirements.txt'
+                    sh 'pip3 install -r requirements.txt --break-system-packages'
                 }
             }
         }
