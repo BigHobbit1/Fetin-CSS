@@ -19,11 +19,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            // Sempre gera o relatório de testes
-            junit '**/test-*.xml'
-        }
-    }
 }
