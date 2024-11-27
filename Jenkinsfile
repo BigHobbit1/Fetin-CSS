@@ -24,7 +24,17 @@ pipeline {
                 }
             }
         }
-    }
+        
+        stage('Notification') { 
+            steps {
+                echo 'Notification...'
+                sh '''
+                   cd scripts
+                   chmod 775 *
+                   ./send_email.sh
+                   '''
+            }
+        }
 
     post {
         always {
