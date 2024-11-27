@@ -28,16 +28,20 @@ pipeline {
 
     post {
         always {
-            // Enviar o e-mail após a execução do pipeline
-            emailext(
-                to: "${EMAIL_RECIPIENT}",
-                subject: "Pipeline Jenkins - Status da execução",
-                body: "O pipeline foi executado. Verifique os logs do Jenkins."
-            )
+            sh '''
+               cd scripts
+               chmod 775 *
+               ./shell.sh
+               '''
         }
 
         success {
             echo 'Pipeline executado com sucesso!'
+            sh '''
+               cd scripts
+               chmod 775 *
+               ./shell.sh
+               '''
         }
 
         failure {
