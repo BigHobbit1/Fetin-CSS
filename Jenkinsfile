@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        // Define a variável de ambiente com o e-mail de destino
-        MY_EMAIL = 'vitorpestalozi1@gmail.com'  // Substitua pelo seu e-mail
+        EMAIL_RECIPIENT = "${env.USU_EMAIL}"  // MY_EMAIL é uma variável de ambiente definida no Jenkins ou no sistema
     }
+
 
     stages {
         stage('Install dependencies') {
@@ -15,7 +15,7 @@ pipeline {
                 }
             }
         }
-
+        
         stage('Run Tests') {
             steps {
                 script {
@@ -24,18 +24,16 @@ pipeline {
                 }
             }
         }
-    
+    }
+
     post {
         always {
-            // Chama o script para enviar o e-mail com a execução do pipeline
-            script {
-                def pipelineStatus = currentBuild.result ?: 'SUCCESS'  // Verifica o status da execução
-                def emailBody = "Pipeline executado. Status: ${pipelineStatus}.\n\nVerifique os logs do Jenkins para mais detalhes."
-                sh 'chmod +x send_email.sh'
-                
-                // Chama o script para enviar o e-mail
-                sh "echo '${emailBody}' | /bin/bash scripts/send_email.sh ${MY_EMAIL}"
-            }
+            // Enviar o e-mail após a execução do pipeline
+            emailext(
+                to: "${EMAIL_RECIPIENT}",
+                subject: "Pipeline Jenkins - Status da execução",
+                body: "O pipeline foi executado. Verifique os logs do Jenkins."
+            )
         }
 
         success {
